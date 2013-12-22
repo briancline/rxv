@@ -81,7 +81,7 @@ class RXV473(object):
     @property
     def input(self):
         request_text = Input % 'GetParam'
-        response = self._request(request_text)
+        response = self._request('GET', request_text)
         return response.find("Main_Zone/Input/Input_Sel").text
 
     @input.setter
@@ -117,7 +117,7 @@ class RXV473(object):
 
         src_name = self.inputs()[self.input]
         request_text = ListGet % (src_name, src_name)
-        res = self._request(request_text)
+        res = self._request('GET', request_text)
 
         ready = (res.iter("Menu_Status").next().text == "Ready")
         layer = int(res.iter("Menu_Layer").next().text)
